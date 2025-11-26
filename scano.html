@@ -1,0 +1,1504 @@
+<!doctype html>
+<html lang="id">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scano Store - Premium Products</title>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-white: #ffffff;
+            --neon-gray: #f0f0f0;
+            --accent-white: #e8e8e8;
+            --dark-bg: #0a0a0a;
+            --light-text: #ffffff;
+            --card-bg: #1a1a1a;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            color: var(--light-text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 2px solid var(--neon-white);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--neon-white);
+            text-shadow: 0 0 10px var(--neon-white);
+            text-decoration: none;
+        }
+
+        .logo svg {
+            width: 40px;
+            height: 40px;
+            filter: drop-shadow(0 0 8px var(--neon-white));
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu li a {
+            color: var(--light-text);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-menu li a:hover {
+            color: var(--neon-white);
+            text-shadow: 0 0 10px var(--neon-white);
+            transform: translateY(-2px);
+        }
+
+        .nav-menu svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(26, 26, 26, 0.98);
+            min-width: 220px;
+            border: 2px solid var(--neon-white);
+            border-radius: 10px;
+            padding: 0.5rem 0;
+            z-index: 1000;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            margin-top: 0.5rem;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+            border-radius: 0;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(0);
+        }
+
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            margin-left: 0.25rem;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--neon-white);
+            color: var(--neon-white);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                background: rgba(26, 26, 26, 0.98);
+                padding: 1rem;
+                border-radius: 10px;
+                margin-top: 1rem;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu li {
+                width: 100%;
+            }
+
+            .nav-menu li a {
+                width: 100%;
+                padding: 1rem;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, 20px); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-white);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8); }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #cccccc;
+        }
+
+        .owl-decoration {
+            width: 150px;
+            height: 150px;
+            margin: 2rem auto;
+            filter: drop-shadow(0 0 20px var(--neon-white));
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--neon-white);
+            text-shadow: 0 0 15px var(--neon-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .section-title svg {
+            width: 40px;
+            height: 40px;
+            filter: drop-shadow(0 0 10px var(--neon-white));
+        }
+
+        /* Product Cards */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            justify-items: center;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .product-card:hover {
+            border-color: var(--neon-white);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid var(--neon-white);
+            padding: 1.5rem;
+        }
+
+        .product-image svg {
+            width: 120px;
+            height: 120px;
+            filter: drop-shadow(0 0 10px var(--neon-white));
+        }
+
+        .product-image img {
+            max-width: 90%;
+            max-height: 90%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border: 2px solid var(--neon-white);
+            border-radius: 12px;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .product-name {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--neon-white);
+            min-height: 2.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .product-description {
+            color: #cccccc;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            min-height: 3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            color: var(--neon-white);
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px var(--neon-white);
+            min-height: 2.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: var(--neon-white);
+            color: #0a0a0a;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 20px var(--neon-white), 0 0 40px rgba(255, 255, 255, 0.6);
+            transform: scale(1.05);
+        }
+
+        /* Testimonial Gallery */
+        .testimonial-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            background: var(--card-bg);
+            padding: 2rem;
+            border: 2px solid var(--neon-white);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .testimonial-track {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-item {
+            min-width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--neon-white);
+            flex-shrink: 0;
+        }
+
+        .testimonial-item svg {
+            width: 150px;
+            height: 150px;
+            filter: drop-shadow(0 0 10px var(--neon-white));
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .slider-btn {
+            background: var(--neon-white);
+            border: none;
+            color: black;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .slider-btn:hover {
+            box-shadow: 0 0 20px var(--neon-white);
+            transform: scale(1.1);
+        }
+
+        /* Discount Section */
+        .discount-box {
+            background: linear-gradient(135deg, #333333 0%, #1a1a1a 100%);
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid var(--neon-white);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+            margin: 2rem 0;
+        }
+
+        .discount-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .discount-box p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Payment Methods */
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .payment-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid var(--neon-white);
+            transition: all 0.3s ease;
+        }
+
+        .payment-card:hover {
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .payment-card svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px var(--neon-white));
+        }
+
+        .payment-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-white);
+        }
+
+        /* Freelance Section */
+        .freelance-box {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid var(--neon-white);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .freelance-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .benefit-item svg {
+            width: 30px;
+            height: 30px;
+            filter: drop-shadow(0 0 5px var(--neon-white));
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid var(--neon-white);
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .contact-item svg {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px var(--neon-white));
+        }
+
+        .contact-item h3 {
+            font-size: 1.3rem;
+            color: var(--neon-white);
+        }
+
+        /* Footer */
+        .footer {
+            background: #0a0a0a;
+            padding: 2rem;
+            text-align: center;
+            border-top: 2px solid var(--neon-white);
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Navigation -->
+  <nav class="navbar">
+   <div class="nav-container"><a href="#" class="logo"> <img src="Scanologo.png" alt="Scano Logo" style="width: 40px; height: 40px; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+     <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="40" r="30" fill="none" stroke="currentColor" stroke-width="2" /> <circle cx="40" cy="35" r="8" fill="currentColor" /> <circle cx="60" cy="35" r="8" fill="currentColor" />
+     </svg><span>Scano Store</span> </a> <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <ul class="nav-menu" id="navMenu">
+     <li class="dropdown"><a href="#produk">
+       <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" />
+       </svg> Produk <span class="dropdown-arrow">▼</span> </a>
+      <div class="dropdown-content"><a href="#streaming">🎬 Streaming Apps</a> <a href="#editing">🎨 Editing Apps</a> <a href="#music">🎵 Music Apps</a> <a href="#other">⚙️ Other Apps</a>
+      </div></li>
+     <li><a href="#testimoni">
+       <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+       </svg>Testimoni</a></li>
+     <li><a href="#discount">
+       <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10" /><path d="M12 6v12M9 8h6a2 2 0 110 4h-6a2 2 0 100 4h6" />
+       </svg>Discount</a></li>
+     <li><a href="#payment">
+       <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="1" y="4" width="22" height="16" rx="2" ry="2" /><line x1="1" y1="10" x2="23" y2="10" />
+       </svg>Payment</a></li>
+     <li><a href="#freelance">
+       <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="8.5" cy="7" r="4" /><polyline points="17 11 19 13 23 9" />
+       </svg>Join Freelance</a></li>
+     <li><a href="#faq">
+       <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><line x1="12" y1="17" x2="12.01" y2="17" />
+       </svg>Q&amp;A</a></li>
+     <li><a href="#kontak">
+       <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
+       </svg>Kontak</a></li>
+    </ul>
+   </div>
+  </nav><!-- Hero Section -->
+  <section class="hero">
+   <div class="hero-content"><img src="https://instagram.fcgk6-2.fna.fbcdn.net/v/t51.2885-19/564078608_881268704193084_8226821698941264991_n.jpg?efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDI0LmMyIn0&amp;_nc_ht=instagram.fcgk6-2.fna.fbcdn.net&amp;_nc_cat=108&amp;_nc_oc=Q6cZ2QGRvd_4Y4Ozt84fE2KQBtziDqE_DlITDJkbugkikL5NcnSH05GTaI9gva0rzxZgsbk&amp;_nc_ohc=fOprBvDonYMQ7kNvwFB-bpo&amp;_nc_gid=Mer4TYIY4hhOcLtqDwDPew&amp;edm=AP4sbd4BAAAA&amp;ccb=7-5&amp;oh=00_Afg65jZzzR8ze4soYIlbN0iVpeOOdkxQoGLSjO6PfFD1IQ&amp;oe=692C8EC0&amp;_nc_sid=7a9f4b" alt="Scano Store Logo" class="owl-decoration" onerror="this.style.display='none'; this.alt='Logo failed to load';" style="border-radius: 50%; border: 3px solid #ffffff; box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);">
+    <h1>Welcome to Scano Store</h1>
+    <p>Premium Apps Subscription - Streaming, Editing, Music &amp; More</p><a href="#produk" class="btn">Lihat Aplikasi</a>
+   </div>
+  </section><!-- Products Section -->
+  <section id="produk" class="section">
+   <h2 class="section-title">
+    <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /> <rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" />
+    </svg> Aplikasi Premium</h2><!-- Streaming Apps -->
+   <h3 id="streaming" style="color: var(--neon-white); font-size: 2rem; margin: 3rem 0 2rem; text-align: center;">🎬 Streaming Apps</h3>
+   <div class="product-grid">
+    <div class="product-card">
+     <div class="product-image"><img src="netflix.png" alt="Netflix" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50" y="55" font-size="35" text-anchor="middle" fill="#ffffff" font-weight="bold">
+        N
+       </text>
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">Netflix</h3>
+      <p class="product-description">Mulai dari 1 Hari hingga Private 1 Bulan</p>
+      <div class="product-price">
+       Rp 3.000 - 100K
+      </div><a href="#" class="btn" onclick="buyProduct('Netflix', 'lihat detail harga'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="viu.png" alt="VIU Premium" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50" y="55" font-size="30" text-anchor="middle" fill="#ffffff" font-weight="bold">
+        VIU
+       </text>
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">VIU Premium</h3>
+      <p class="product-description">Private Unlimited 1 Bulan</p>
+      <div class="product-price">
+       Rp 2.000
+      </div><a href="#" class="btn" onclick="buyProduct('VIU Premium', 'Rp 2.000')">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="wetv.jpeg" alt="WeTV" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50" y="55" font-size="25" text-anchor="middle" fill="#ffffff" font-weight="bold">
+        WeTV
+       </text>
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">WeTV</h3>
+      <p class="product-description">Share dan Private 1 Bulan</p>
+      <div class="product-price">
+       Rp 12K - 36K
+      </div><a href="#" class="btn" onclick="buyProduct('WeTV', 'lihat detail harga')">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="bstation.jpeg" alt="Bstation" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50" y="60" font-size="20" text-anchor="middle" fill="#ffffff" font-weight="bold">
+        Bstation
+       </text>
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">Bstation</h3>
+      <p class="product-description">Share 1 Bulan hingga 1 Tahun</p>
+      <div class="product-price">
+       Rp 12K - 25K
+      </div><a href="#" class="btn" onclick="buyProduct('Bstation', 'lihat detail harga'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="iqiyi.jpeg" alt="iQIYI" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50" y="55" font-size="25" text-anchor="middle" fill="#ffffff" font-weight="bold">
+        iQIYI
+       </text>
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">iQIYI</h3>
+      <p class="product-description">Standard &amp; Premium Share/Private</p>
+      <div class="product-price">
+       Rp 10K - 24K
+      </div><a href="#" class="btn" onclick="buyProduct('iQIYI', 'lihat detail harga'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="prime.png" alt="Amazon Prime" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50" y="60" font-size="18" text-anchor="middle" fill="#ffffff" font-weight="bold">
+        Prime
+       </text>
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">Amazon Prime</h3>
+      <p class="product-description">2-5 User hingga Unlimited 1 Bulan</p>
+      <div class="product-price">
+       Rp 10.5K - 16.5K
+      </div><a href="#" class="btn" onclick="buyProduct('Amazon Prime', 'lihat detail harga'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="drakorid.jpeg" alt="Drakor ID" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50" y="60" font-size="18" text-anchor="middle" fill="#ffffff" font-weight="bold">
+        Drakor
+       </text>
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">Drakor ID</h3>
+      <p class="product-description">Share 1 Bulan - 1 Tahun</p>
+      <div class="product-price">
+       Rp 10K - 14.5K
+      </div><a href="#" class="btn" onclick="buyProduct('Drakor ID', 'lihat detail harga'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="youku.png" alt="Youku" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50" y="55" font-size="25" text-anchor="middle" fill="#ffffff" font-weight="bold">
+        Youku
+       </text>
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">Youku</h3>
+      <p class="product-description">Share 1 Bulan - 1 Tahun</p>
+      <div class="product-price">
+       Rp 10.5K - 18.5K
+      </div><a href="#" class="btn" onclick="buyProduct('Youku', 'lihat detail harga'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="moviebox.jpeg" alt="Moviebox" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="25" y="30" width="50" height="40" fill="none" stroke="#ffffff" stroke-width="3" rx="5" /> <path d="M 42 45 L 42 55 L 52 50 Z" fill="#ffffff" />
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">Moviebox</h3>
+      <p class="product-description">Share 1 Bulan - 1 Tahun</p>
+      <div class="product-price">
+       Rp 10.5K - 13.5K
+      </div><a href="#" class="btn" onclick="buyProduct('Moviebox', 'lihat detail harga'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="youtube premium.jpeg" alt="YouTube Premium" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M 50 35 L 65 45 L 65 60 L 50 70 L 35 60 L 35 45 Z" fill="none" stroke="#ffffff" stroke-width="3" /> <polygon points="45,45 45,60 58,52.5" fill="#ffffff" />
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">YouTube Premium</h3>
+      <p class="product-description">Family Plan &amp; Individual 1 Bulan</p>
+      <div class="product-price">
+       Rp 9.5K - 13.8K
+      </div><a href="#" class="btn" onclick="buyProduct('YouTube Premium', 'lihat detail harga'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+   </div><!-- Editing Apps -->
+   <h3 id="editing" style="color: var(--neon-white); font-size: 2rem; margin: 4rem 0 2rem; text-align: center;">🎨 Editing Apps</h3>
+   <div class="product-grid">
+    <div class="product-card">
+     <div class="product-image"><img src="canva.jpeg" alt="Canva Pro" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="40" r="15" fill="none" stroke="#ffffff" stroke-width="3" /> <circle cx="35" cy="65" r="12" fill="none" stroke="#ffffff" stroke-width="3" /> <circle cx="65" cy="65" r="12" fill="none" stroke="#ffffff" stroke-width="3" />
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">Canva Pro</h3>
+      <p class="product-description">Member, Designer, Education &amp; Owner</p>
+      <div class="product-price">
+       Rp 200 - 25K
+      </div><a href="#" class="btn" onclick="buyProduct('Canva Pro', 'lihat detail harga'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="capcut.png" alt="CapCut Pro" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="30" width="40" height="40" fill="none" stroke="#ffffff" stroke-width="3" rx="5" /> <path d="M 40 45 L 45 50 L 60 35" stroke="#ffffff" stroke-width="3" fill="none" />
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">CapCut Pro</h3>
+      <p class="product-description">2 User &amp; Private 1 Bulan/Week</p>
+      <div class="product-price">
+       Rp 10K - 14K
+      </div><a href="#" class="btn" onclick="buyProduct('CapCut Pro', 'lihat detail harga'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="alightmotion.png" alt="Alight Motion" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M 30 50 L 50 30 L 70 50 L 50 70 Z" fill="none" stroke="#ffffff" stroke-width="3" />
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">Alight Motion</h3>
+      <p class="product-description">Private 1 Tahun</p>
+      <div class="product-price">
+       Rp 6K - 9K
+      </div><a href="#" class="btn" onclick="buyProduct('Alight Motion', 'lihat detail harga'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="piscart.jpeg" alt="Picsart Pro" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="25" fill="none" stroke="#ffffff" stroke-width="3" /> <path d="M 50 30 L 50 50 L 65 50" stroke="#ffffff" stroke-width="3" />
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">Picsart Pro</h3>
+      <p class="product-description">Sharing &amp; Private 1 Bulan</p>
+      <div class="product-price">
+       Rp 4K - 10K
+      </div><a href="#" class="btn" onclick="buyProduct('Picsart Pro', 'lihat detail harga'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+   </div><!-- Music Apps -->
+   <h3 id="music" style="color: var(--neon-white); font-size: 2rem; margin: 4rem 0 2rem; text-align: center;">🎵 Music Apps</h3>
+   <div class="product-grid">
+    <div class="product-card">
+     <div class="product-image"><img src="applemusic.jpeg" alt="Apple Music" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="30" fill="none" stroke="#ffffff" stroke-width="3" /> <path d="M 45 35 L 45 60 M 55 30 L 55 55" stroke="#ffffff" stroke-width="3" /> <circle cx="45" cy="60" r="5" fill="#ffffff" /> <circle cx="55" cy="55" r="5" fill="#ffffff" />
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">Apple Music</h3>
+      <p class="product-description">iMessage 1-3 Bulan</p>
+      <div class="product-price">
+       Rp 14.9K - 25.8K
+      </div><a href="#" class="btn" onclick="buyProduct('Apple Music', 'lihat detail harga'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="youtubemusic.png" alt="YouTube Music" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M 50 35 L 65 45 L 65 60 L 50 70 L 35 60 L 35 45 Z" fill="none" stroke="#ffffff" stroke-width="3" /> <polygon points="45,45 45,60 58,52.5" fill="#ffffff" />
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">YouTube Music</h3>
+      <p class="product-description">Premium 1 Bulan</p>
+      <div class="product-price">
+       Rp 9.000
+      </div><a href="#" class="btn" onclick="buyProduct('YouTube Music', 'Rp 9.000'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="spotify.jpeg" alt="Spotify Premium" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="30" fill="none" stroke="#ffffff" stroke-width="3" /> <circle cx="35" cy="50" r="8" fill="#ffffff" /> <circle cx="50" cy="50" r="8" fill="#ffffff" /> <circle cx="65" cy="50" r="8" fill="#ffffff" />
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">Spotify Premium</h3>
+      <p class="product-description">Premium 1 Bulan</p>
+      <div class="product-price">
+       Rp 30.000
+      </div><a href="#" class="btn" onclick="buyProduct('Spotify Premium', 'Rp 30.000'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+   </div><!-- Other Apps -->
+   <h3 id="other" style="color: var(--neon-white); font-size: 2rem; margin: 4rem 0 2rem; text-align: center;">⚙️ Other Apps</h3>
+   <div class="product-grid">
+    <div class="product-card">
+     <div class="product-image"><img src="zoom.png" alt="Zoom Pro" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="35" width="40" height="30" fill="none" stroke="#ffffff" stroke-width="3" rx="3" /> <path d="M 45 50 L 55 45 L 55 55 Z" fill="#ffffff" />
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">Zoom Pro</h3>
+      <p class="product-description">Private 1-2 Week</p>
+      <div class="product-price">
+       Rp 5K - 8K
+      </div><a href="#" class="btn" onclick="buyProduct('Zoom Pro', 'lihat detail harga'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="chatgpt.png" alt="ChatGPT Plus" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="30" width="40" height="40" fill="none" stroke="#ffffff" stroke-width="3" rx="5" /> <text x="50" y="58" font-size="20" text-anchor="middle" fill="#ffffff" font-weight="bold">
+        AI
+       </text>
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">ChatGPT Plus</h3>
+      <p class="product-description">Sharing &amp; Private 7 Hari - 1 Bulan</p>
+      <div class="product-price">
+       Rp 17K - 120K
+      </div><a href="#" class="btn" onclick="buyProduct('ChatGPT Plus', 'lihat detail harga'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="wattpad.jpeg" alt="Wattpad Premium" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M 35 45 L 50 30 L 65 45 L 65 70 L 35 70 Z" fill="none" stroke="#ffffff" stroke-width="3" /> <rect x="42" y="55" width="16" height="15" fill="#ffffff" />
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">Wattpad Premium</h3>
+      <p class="product-description">Sharing 1 Tahun</p>
+      <div class="product-price">
+       Rp 15.500
+      </div><a href="#" class="btn" onclick="buyProduct('Wattpad Premium', 'Rp 15.500'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+    <div class="product-card">
+     <div class="product-image"><img src="fizzo.jpeg" alt="Fizzo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="25" fill="none" stroke="#ffffff" stroke-width="3" /> <text x="50" y="58" font-size="18" text-anchor="middle" fill="#ffffff" font-weight="bold">
+        Fizzo
+       </text>
+      </svg>
+     </div>
+     <div class="product-info">
+      <h3 class="product-name">Fizzo</h3>
+      <p class="product-description">Sharing 1 Bulan</p>
+      <div class="product-price">
+       Rp 10.500
+      </div><a href="#" class="btn" onclick="buyProduct('Fizzo', 'Rp 10.500'); return false;">PESAN SEKARANG</a>
+     </div>
+    </div>
+   </div>
+   <div style="text-align: center; margin-top: 4rem; padding: 2rem; background: var(--card-bg); border-radius: 15px; border: 2px solid var(--neon-white);">
+    <h3 style="color: var(--neon-white); font-size: 1.5rem; margin-bottom: 1rem;">❓ Tidak ada di daftar?</h3>
+    <p style="color: #cccccc; margin-bottom: 1.5rem;">Chat admin untuk menanyakan aplikasi lainnya</p><a href="#" class="btn" onclick="chatAdmin()">HUBUNGI ADMIN</a>
+   </div>
+  </section><!-- Testimonials Section -->
+  <section id="testimoni" class="section">
+   <h2 class="section-title">
+    <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /> <circle cx="12" cy="7" r="4" />
+    </svg> Testimoni Pelanggan</h2>
+   <div class="testimonial-slider">
+    <div class="testimonial-track" id="testimonialTrack">
+     <div class="testimonial-item"><img src="test1.jpg" alt="Testimoni 1" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50" y="50" font-size="40" text-anchor="middle" dominant-baseline="middle" fill="#ffffff">
+        Testimoni 1
+       </text>
+      </svg>
+     </div>
+     <div class="testimonial-item"><img src="test2.jpg" alt="Testimoni 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50" y="50" font-size="40" text-anchor="middle" dominant-baseline="middle" fill="#ffffff">
+        Testimoni 2
+       </text>
+      </svg>
+     </div>
+     <div class="testimonial-item"><img src="test3.jpg" alt="Testimoni 3" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50" y="50" font-size="40" text-anchor="middle" dominant-baseline="middle" fill="#ffffff">
+        Testimoni 3
+       </text>
+      </svg>
+     </div>
+     <div class="testimonial-item"><img src="test4.jpg" alt="Testimoni 4" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50" y="50" font-size="40" text-anchor="middle" dominant-baseline="middle" fill="#ffffff">
+        Testimoni 4
+       </text>
+      </svg>
+     </div>
+     <div class="testimonial-item"><img src="test5.jpg" alt="Testimoni 5" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <svg style="display:none;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50" y="50" font-size="40" text-anchor="middle" dominant-baseline="middle" fill="#ffffff">
+        Testimoni 5
+       </text>
+      </svg>
+     </div>
+    </div>
+    <div class="slider-controls"><button class="slider-btn" onclick="slideTestimonials('prev')">‹</button> <button class="slider-btn" onclick="slideTestimonials('next')">›</button>
+    </div>
+   </div>
+   <div style="text-align: center; margin-top: 2rem;"><a href="https://t.me/scanoinfo/" target="_blank" rel="noopener noreferrer" class="btn">LIHAT SEMUA TESTIMONI DI TELEGRAM</a>
+   </div>
+  </section><!-- Discount Section -->
+  <section id="discount" class="section">
+   <div class="discount-box">
+    <h2>🎁 Dapatkan Diskon Spesial!</h2>
+    <p>Promo eksklusif untuk pelanggan setia kami</p><a href="#" class="btn" onclick="getDiscount()">DAPATKAN DISCOUNT</a>
+   </div>
+  </section><!-- Payment Section -->
+  <section id="payment" class="section">
+   <h2 class="section-title">
+    <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2" /> <line x1="1" y1="10" x2="23" y2="10" />
+    </svg> Metode Pembayaran</h2>
+   <div class="payment-grid">
+    <div class="payment-card">
+     <svg viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="none" stroke="#ffffff" stroke-width="3" /> <text x="50" y="58" font-size="24" text-anchor="middle" fill="#ffffff" font-weight="bold">
+       DANA
+      </text>
+     </svg>
+     <h3>DANA</h3>
+     <p style="color: #cccccc; margin-bottom: 1rem;">Pembayaran cepat &amp; aman</p><a href="#" class="btn" onclick="selectPayment('DANA')">Pilih DANA</a>
+    </div>
+    <div class="payment-card">
+     <svg viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="none" stroke="#ffffff" stroke-width="3" /> <text x="50" y="58" font-size="20" text-anchor="middle" fill="#ffffff" font-weight="bold">
+       GOPAY
+      </text>
+     </svg>
+     <h3>Gopay</h3>
+     <p style="color: #cccccc; margin-bottom: 1rem;">Praktis dengan satu klik</p><a href="#" class="btn" onclick="selectPayment('Gopay')">Pilih Gopay</a>
+    </div>
+    <div class="payment-card">
+     <svg viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="15" y="15" width="70" height="70" fill="none" stroke="#ffffff" stroke-width="3" rx="5" /> <rect x="25" y="25" width="15" height="15" fill="#ffffff" /> <rect x="60" y="25" width="15" height="15" fill="#ffffff" /> <rect x="25" y="60" width="15" height="15" fill="#ffffff" /> <rect x="60" y="60" width="15" height="15" fill="#ffffff" />
+     </svg>
+     <h3>QRIS</h3>
+     <p style="color: #cccccc; margin-bottom: 1rem;">Scan &amp; bayar via admin</p><a href="#" class="btn" onclick="selectPayment('QRIS')">Hubungi Admin</a>
+    </div>
+   </div>
+  </section><!-- Freelance Section -->
+  <section id="freelance" class="section">
+   <h2 class="section-title">
+    <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /> <circle cx="8.5" cy="7" r="4" /> <polyline points="17 11 19 13 23 9" />
+    </svg> Bergabung Sebagai Reseller</h2>
+   <div class="freelance-box">
+    <p style="font-size: 1.2rem; color: #cccccc; margin-bottom: 2rem; text-align: center;">Jadilah reseller Scano Store dan dapatkan komisi menarik setiap penjualan!</p>
+    <div class="freelance-benefits">
+     <div class="benefit-item">
+      <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12" />
+      </svg><span>Komisi Kompetitif</span>
+     </div>
+     <div class="benefit-item">
+      <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12" />
+      </svg><span>Harga Reseller Spesial</span>
+     </div>
+     <div class="benefit-item">
+      <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12" />
+      </svg><span>Dukungan Penuh</span>
+     </div>
+     <div class="benefit-item">
+      <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12" />
+      </svg><span>Fleksibel &amp; Mudah</span>
+     </div>
+    </div>
+    <div style="text-align: center; margin-top: 2rem;"><a href="#" class="btn" onclick="joinFreelance()">DAFTAR RESELLER SEKARANG</a>
+    </div>
+   </div>
+  </section><!-- FAQ Section -->
+  <section id="faq" class="section">
+   <h2 class="section-title">
+    <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <line x1="12" y1="17" x2="12.01" y2="17" />
+    </svg> Ada Pertanyaan?</h2>
+   <div style="background: var(--card-bg); padding: 3rem; border-radius: 20px; border: 2px solid var(--neon-white); text-align: center;">
+    <p style="font-size: 1.2rem; margin-bottom: 2rem; color: #cccccc;">Tim kami siap membantu menjawab semua pertanyaan Anda</p><a href="#" class="btn" onclick="chatAdmin()">CHAT ADMIN</a>
+   </div>
+  </section><!-- Contact Section -->
+  <section id="kontak" class="section">
+   <h2 class="section-title">
+    <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /> <circle cx="12" cy="10" r="3" />
+    </svg> Hubungi Kami</h2>
+   <div class="contact-grid"><a href="#" class="contact-item" onclick="openWhatsApp()">
+     <svg viewbox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+     </svg><h3>WhatsApp</h3></a> <a href="#" class="contact-item" onclick="openTelegram()">
+     <svg viewbox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+     </svg><h3>Telegram</h3></a> <a href="#" class="contact-item" onclick="openEmail()">
+     <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /> <polyline points="22,6 12,13 2,6" />
+     </svg><h3>Email</h3></a> <a href="#" class="contact-item" onclick="openInstagram()">
+     <svg viewbox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+     </svg><h3>Instagram</h3></a>
+   </div>
+  </section><!-- Footer -->
+  <footer class="footer">
+   <p>© 2024 Scano Store. All rights reserved.</p>
+   <p style="margin-top: 0.5rem; color: #cccccc;">Premium Apps Subscription - Trusted &amp; Reliable</p>
+  </footer>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script>
+        const defaultConfig = {
+            site_title: "Scano Store",
+            hero_title: "Welcome to Scano Store",
+            hero_subtitle: "Premium Apps Subscription - Streaming, Editing, Music & More",
+            whatsapp_number: "6285183030169",
+            telegram_username: "scanolots",
+            email_address: "scanolots@gmail.com",
+            instagram_username: "lotscan_freelance"
+        };
+
+        let currentSlide = 0;
+
+        async function onConfigChange(config) {
+            document.title = config.site_title || defaultConfig.site_title;
+            
+            const logoText = document.querySelector('.logo span');
+            if (logoText) {
+                logoText.textContent = config.site_title || defaultConfig.site_title;
+            }
+
+            const heroTitle = document.querySelector('.hero h1');
+            if (heroTitle) {
+                heroTitle.textContent = config.hero_title || defaultConfig.hero_title;
+            }
+
+            const heroSubtitle = document.querySelector('.hero p');
+            if (heroSubtitle) {
+                heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+            }
+        }
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig: defaultConfig,
+                onConfigChange: onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [],
+                    borderables: [],
+                    fontEditable: undefined,
+                    fontSizeable: undefined
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["site_title", config.site_title || defaultConfig.site_title],
+                    ["hero_title", config.hero_title || defaultConfig.hero_title],
+                    ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                    ["whatsapp_number", config.whatsapp_number || defaultConfig.whatsapp_number],
+                    ["telegram_username", config.telegram_username || defaultConfig.telegram_username],
+                    ["email_address", config.email_address || defaultConfig.email_address],
+                    ["instagram_username", config.instagram_username || defaultConfig.instagram_username]
+                ])
+            });
+        }
+
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        function buyProduct(productName, price) {
+            const message = encodeURIComponent(`Halo! Saya tertarik membeli ${productName} dengan harga ${price}`);
+            window.open(`https://wa.me/?text=${message}`, '_blank', 'noopener,noreferrer');
+            return false;
+        }
+
+        function getDiscount() {
+            window.open(`https://t.me/scanolots`, '_blank', 'noopener,noreferrer');
+            return false;
+        }
+
+        function selectPayment(method) {
+            if (method === 'DANA') {window.open('dana.html', '_blank', 'noopener,noreferrer');
+                const paymentHTML = `<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment DANA - Scano Store</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .payment-container {
+            background: rgba(26, 26, 26, 0.95);
+            border: 2px solid #ffffff;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+            text-align: center;
+        }
+        .owl-art {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            white-space: pre;
+            font-family: monospace;
+        }
+        .title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-bottom: 2rem;
+        }
+        .info-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+        }
+        .info-item::before {
+            content: '😊';
+            font-size: 1.3rem;
+        }
+        .highlight {
+            color: #ffffff;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+        .back-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: #ffffff;
+            color: #0a0a0a;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            box-shadow: 0 0 20px #ffffff;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <div class="owl-art">    ,_,
+  (⦿▾⦿)
+  (    )~乀
+  し し</div>
+        <div class="title">⊹ ♡ payment ˚ ₊ *</div>
+        <div class="subtitle">by scano ᯤ ໑</div>
+        
+        <div style="font-size: 2rem; margin: 1rem 0;">hoo–hoo 😊 ʚ🦉ɞ</div>
+        <div style="font-size: 1.5rem; margin: 1rem 0;">₍ ✿ ◠ ⑅ ◠ ₎ ⊹ DANA 💳</div>
+        
+        <div class="info-box">
+            <div class="info-item">
+                <span>ᥴ⃘ᦱ˙ 𝆕 a/n : <span class="highlight">AckerlySsmjt</span></span>
+            </div>
+            <div class="info-item">
+                <span>ᥴ⃘ᦱ˙ 𝆕 numb : <span class="highlight">081271242937</span></span>
+            </div>
+            <div class="info-item">
+                <span>ᥴ⃘ᦱ˙ 𝆕 dana → dana : <span class="highlight">100p</span></span>
+            </div>
+            <div class="info-item">
+                <span>ᥴ⃘ᦱ˙ 𝆕 luar dana → dana : <span class="highlight">fee 1k</span></span>
+            </div>
+        </div>
+        
+        <a href="javascript:window.close()" class="back-btn">KEMBALI</a>
+    </div>
+</body>
+</html>`;
+                const newWindow = window.open('gopay.html', '_blank', 'noopener,noreferrer');
+                newWindow.document.write(paymentHTML);
+                newWindow.document.close();
+                return false;
+            } else if (method === 'Gopay') { window.open('gopay.html', '_blank', 'noopener,noreferrer');
+                const paymentHTML = `
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gopay - Scano Store</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .payment-container {
+            background: rgba(26, 26, 26, 0.95);
+            border: 2px solid #ffffff;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+            text-align: center;
+        }
+        .owl-art {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            white-space: pre;
+            font-family: monospace;
+        }
+        .title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-bottom: 2rem;
+        }
+        .info-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+        }
+        .info-item::before {
+            content: '😊';
+            font-size: 1.3rem;
+        }
+        .highlight {
+            color: #ffffff;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+        .back-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: #ffffff;
+            color: #0a0a0a;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            box-shadow: 0 0 20px #ffffff;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <div class="owl-art">    ,_,
+  (⦿▾⦿)
+  (    )~乀
+  し し</div>
+        <div class="title">⊹ ♡ payment ˚ ₊ *</div>
+        <div class="subtitle">by scano ᯤ ໑</div>
+        
+        <div style="font-size: 2rem; margin: 1rem 0;">hoo–hoo 😊 ʚ🦉ɞ</div>
+        <div style="font-size: 1.5rem; margin: 1rem 0;">₍ ✿ ◠ ⑅ ◠ ₎ ⊹ Gopay 💳</div>
+        
+        <div class="info-box">
+            <div class="info-item">
+                <span>ᥴ⃘ᦱ˙ 𝆕 a/n : <span class="highlight">Sam</span></span>
+            </div>
+            <div class="info-item">
+                <span>ᥴ⃘ᦱ˙ 𝆕 numb : <span class="highlight">081271242937</span></span>
+            </div>
+            <div class="info-item">
+                <span>ᥴ⃘ᦱ˙ 𝆕 gopay → gopay : <span class="highlight">100p</span></span>
+            </div>
+            <div class="info-item">
+                <span>ᥴ⃘ᦱ˙ 𝆕 luar gopay → gopay : <span class="highlight">fee 500p</span></span>
+            </div>
+        </div>
+        
+        <a href="javascript:window.close()" class="back-btn">KEMBALI</a>
+    </div>
+</body>
+</html>`;
+                const newWindow = window.open('', '_blank', 'noopener,noreferrer');
+                newWindow.document.write(paymentHTML);
+                newWindow.document.close();
+                return false;
+            } else {
+                const message = encodeURIComponent(`Halo! Saya ingin melakukan pembayaran via ${method}`);
+                window.open(`https://wa.me/?text=${message}`, '_blank', 'noopener,noreferrer');
+                return false;
+            }
+        }
+
+        function joinFreelance() {
+            const message = encodeURIComponent('Halo! Saya tertarik untuk bergabung sebagai freelancer');
+            window.open(`https://wa.me/?text=${message}`, '_blank', 'noopener,noreferrer');
+            return false;
+        }
+
+        function chatAdmin() {
+            const message = encodeURIComponent('Halo! Saya memiliki pertanyaan');
+            window.open(`https://wa.me/?text=${message}`, '_blank', 'noopener,noreferrer');
+            return false;
+        }
+
+        function openWhatsApp() {
+            window.open(`https://wa.me/`, '_blank', 'noopener,noreferrer');
+            return false;
+        }
+
+        function openTelegram() {
+            window.open(`https://t.me/scanolots`, '_blank', 'noopener,noreferrer');
+            return false;
+        }
+
+        function openEmail() {
+            window.open(`mailto:scanolots@gmail.com`, '_blank', 'noopener,noreferrer');
+            return false;
+        }
+
+        function openInstagram() {
+            window.open(`https://instagram.com/lotscan_freelance`, '_blank', 'noopener,noreferrer');
+            return false;
+        }
+
+        function slideTestimonials(direction) {
+            const track = document.getElementById('testimonialTrack');
+            const items = track.children;
+            const itemWidth = items[0].offsetWidth + 32;
+            
+            if (direction === 'next') {
+                currentSlide = (currentSlide + 1) % items.length;
+            } else {
+                currentSlide = (currentSlide - 1 + items.length) % items.length;
+            }
+            
+            track.style.transform = `translateX(-${currentSlide * itemWidth}px)`;
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        const navMenu = document.getElementById('navMenu');
+                        if (navMenu.classList.contains('active')) {
+                            navMenu.classList.remove('active');
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a490721a74f14a6',t:'MTc2NDE1NjM1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
